@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Star } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navItems = [
@@ -22,6 +22,11 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // simple theme toggle — toggles `star-theme` class on the root element
+  const toggleStarTheme = () => {
+    document.documentElement.classList.toggle("star-theme");
+  };
 
   return (
     <nav
@@ -55,14 +60,27 @@ export const Navbar = () => {
           ))}
         </div>
 
-        {/* mobile nav toggle */}
-        <button
-          onClick={() => setIsMenuOpen((prev) => !prev)}
-          className="md:hidden p-2 text-foreground z-50"
-          aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-        >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* mobile controls: theme toggle + menu toggle */}
+        <div className="flex items-center space-x-2">
+          {/* Theme toggle: visible on mobile and desktop */}
+          <button
+            onClick={toggleStarTheme}
+            className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors z-50"
+            aria-label="Toggle star theme"
+            title="Toggle star theme"
+          >
+            <Star size={18} />
+          </button>
+
+          {/* mobile nav toggle */}
+          <button
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+            className="md:hidden p-2 text-foreground z-50"
+            aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
 
         {/* mobile overlay menu */}
         <div
