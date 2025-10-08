@@ -35,17 +35,16 @@ export const AboutSection = () => {
               </a>
 
               {/* ---------- DOWNLOAD RESUME BUTTON ---------- */}
-              {/* Recommended: place RainySharma_Resume.pdf in your project's public/ folder */}
+             
               <a
-                href="/RainySharma_Resume.pdf"
-                download="RainySharma_Resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
-                aria-label="Download Rainy Sharma Resume"
-              >
-                Download CV
-              </a>
+  href="/project/RainySharma_Resume.pdf"
+  download="RainySharma_Resume.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300"
+>
+  Download CV
+</a>
             </div>
           </div>
 
