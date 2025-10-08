@@ -16,37 +16,34 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // use window.scrollY (not screenY)
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 10); // fixed small bug (screenY → scrollY)
     };
 
-    handleScroll(); // set initial state on mount
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
       className={cn(
-        "fixed w-full z-50 transition-all duration-300 left-0",
-        isScrolled
-          ? "py-3 bg-background/80 backdrop-blur-md shadow-xs"
-          : "py-5 bg-transparent"
+        "fixed w-full z-40 transition-all duration-300",
+        isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
       )}
     >
-      <div className="container mx-auto max-w-6xl px-4 flex items-center justify-between">
+      <div className="container flex items-center justify-between">
         <a
-          className="text-xl font-bold text-primary flex items-center z-50"
+          className="text-xl font-bold text-primary flex items-center"
           href="#hero"
         >
           <span className="relative z-10">
             <span className="text-glow text-foreground">Rainy's</span>{" "}
-            <span className="ml-2">Portfolio</span>
+            Portfolio
           </span>
         </a>
 
         {/* desktop nav */}
-        <div className="hidden md:flex space-x-8 z-50">
+        <div className="hidden md:flex space-x-8 mr-6">
+          {/* 👆 added mr-6 to create space between Contact and button */}
           {navItems.map((item, key) => (
             <a
               key={key}
@@ -58,7 +55,7 @@ export const Navbar = () => {
           ))}
         </div>
 
-        {/* mobile toggle */}
+        {/* mobile nav toggle */}
         <button
           onClick={() => setIsMenuOpen((prev) => !prev)}
           className="md:hidden p-2 text-foreground z-50"
@@ -67,13 +64,13 @@ export const Navbar = () => {
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* mobile overlay */}
+        {/* mobile overlay menu */}
         <div
-          aria-hidden={!isMenuOpen}
           className={cn(
-            "fixed inset-0 z-40 md:hidden flex items-center justify-center transition-opacity duration-300",
+            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
+            "transition-all duration-300 md:hidden",
             isMenuOpen
-              ? "opacity-100 pointer-events-auto bg-background/95 backdrop-blur-md"
+              ? "opacity-100 pointer-events-auto"
               : "opacity-0 pointer-events-none"
           )}
         >
@@ -82,7 +79,7 @@ export const Navbar = () => {
               <a
                 key={key}
                 href={item.href}
-                className="text-foreground/90 hover:text-primary transition-colors duration-300"
+                className="text-foreground/80 hover:text-primary transition-colors duration-300"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
