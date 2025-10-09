@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Menu, X, Star } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navItems = [
@@ -16,18 +16,12 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10); // fixed small bug (screenY → scrollY)
+      setIsScrolled(window.screenY > 10);
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // simple theme toggle — toggles `star-theme` class on the root element
-  const toggleStarTheme = () => {
-    document.documentElement.classList.toggle("star-theme");
-  };
-
   return (
     <nav
       className={cn(
@@ -41,14 +35,13 @@ export const Navbar = () => {
           href="#hero"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground">Rainy's</span>{" "}
+            <span className="text-glow text-foreground"> PedroTech </span>{" "}
             Portfolio
           </span>
         </a>
 
-        {/* desktop nav: made visible on mobile by switching from `hidden md:flex` -> `flex md:flex` */}
-        <div className="flex md:flex space-x-8 mr-6">
-          {/* 👆 minimal change so toggle shows on phone */}
+        {/* desktop nav */}
+        <div className="hidden md:flex space-x-8 mr-6">
           {navItems.map((item, key) => (
             <a
               key={key}
@@ -60,51 +53,40 @@ export const Navbar = () => {
           ))}
         </div>
 
-        {/* mobile controls: theme toggle + menu toggle */}
-        <div className="flex items-center space-x-2">
-          {/* Theme toggle: visible on mobile and desktop */}
-          <button
-            onClick={toggleStarTheme}
-            className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors z-50"
-            aria-label="Toggle star theme"
-            title="Toggle star theme"
-          >
-            <Star size={18} />
-          </button>
+       {/* mobile nav */}
+<button
+  onClick={() => setIsMenuOpen((prev) => !prev)}
+  // make display explicit, raise z-index a lot, and keep accessible aria-label
+  className="block md:hidden p-2 text-foreground z-[9999]"
+  aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+>
+  {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+</button>
 
-          {/* mobile nav toggle */}
-          <button
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="md:hidden p-2 text-foreground z-50"
-            aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+<div
+  className={cn(
+    // fixed full-screen overlay, use correct backdrop class and a slightly lower z than button
+    "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
+    "transition-all duration-300 md:hidden",
+    isMenuOpen
+      ? "opacity-100 pointer-events-auto"
+      : "opacity-0 pointer-events-none"
+  )}
+>
+  <div className="flex flex-col space-y-8 text-xl">
+    {navItems.map((item, key) => (
+      <a
+        key={key}
+        href={item.href}
+        className="text-foreground/80 hover:text-primary transition-colors duration-300"
+        onClick={() => setIsMenuOpen(false)}
+      >
+        {item.name}
+      </a>
+    ))}
+  </div>
+</div>
 
-        {/* mobile overlay menu */}
-        <div
-          className={cn(
-            "fixed inset-0 bg-background/95 backdrop-blur-md z-40 flex flex-col items-center justify-center",
-            "transition-all duration-300 md:hidden",
-            isMenuOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          )}
-        >
-          <div className="flex flex-col space-y-8 text-xl">
-            {navItems.map((item, key) => (
-              <a
-                key={key}
-                href={item.href}
-                className="text-foreground/80 hover:text-primary transition-colors duration-300"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-        </div>
       </div>
     </nav>
   );
