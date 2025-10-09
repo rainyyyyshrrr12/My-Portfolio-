@@ -46,9 +46,9 @@ export const Navbar = () => {
           </span>
         </a>
 
-        {/* desktop nav */}
-        <div className="hidden md:flex space-x-8 mr-6">
-          {/* 👆 added mr-6 to create space between Contact and button */}
+        {/* desktop nav: made visible on mobile by switching from `hidden md:flex` -> `flex md:flex` */}
+        <div className="flex md:flex space-x-8 mr-6">
+          {/* 👆 minimal change so toggle shows on phone */}
           {navItems.map((item, key) => (
             <a
               key={key}
