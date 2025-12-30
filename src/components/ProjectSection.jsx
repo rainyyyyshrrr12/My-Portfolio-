@@ -20,8 +20,8 @@ const projects = [
       "Tailwind CSS",
       "AI/LLM Integration (Gemini API)",
     ],
-    demoUrl: "",
-    githubUrl: "",
+    demoUrl: "https://jobzen-kappa.vercel.app/",
+    githubUrl: "https://github.com/rainyyyyshrrr12/JobZen",
   },
   {
     id: 2,
