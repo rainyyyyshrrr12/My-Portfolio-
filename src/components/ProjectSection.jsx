@@ -53,8 +53,8 @@ const projects = [
       "JWT",
       "Socket.IO",
     ],
-    demoUrl: "#",
-    githubUrl: "#",
+    demoUrl: "https://aws-frontend-qbl6.onrender.com",
+    githubUrl: "https://github.com/rainyyyyshrrr12/aws-frontend",
   },
   {
     id: 4,
