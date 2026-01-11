@@ -1,11 +1,13 @@
 import { ArrowDown } from "lucide-react";
+import { SkillsSlideshow } from "@/components/SkillsSlideshow";
+import { TechStackSlider } from "@/components/TechStackSlideshow";
+
 
 export const HeroSection = () => {
   return (
     <section
       id="hero"
       className="relative z-0 min-h-screen flex flex-col items-center justify-center px-4 pt-20"
-   
     >
       <div className="container max-w-4xl mx-auto text-center z-10">
         <div className="space-y-6">
@@ -31,15 +33,19 @@ export const HeroSection = () => {
             </span>
           </h1>
 
-          {/* ---- DESCRIPTION ---- */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-delay-3">
-            I build modern, AI-driven web applications with Next.js and the MERN
-            Stack, creating experiences that are fast, functional, and beautifully
-            designed.
-          </p>
+          {/* ---- SKILLS ---- */}
+          <div className="flex justify-center opacity-0 animate-fade-in-delay-3">
+            <SkillsSlideshow />
+          </div>
+
+          {/* ---- TECH STACK SLIDESHOW (NEW) ---- */}
+          <div className="mt-4 opacity-0 animate-fade-in-delay-4">
+  <TechStackSlider />
+</div>
+
 
           {/* ---- BUTTON ---- */}
-          <div className="pt-4 opacity-0 animate-fade-in-delay-4">
+          <div className="pt-6 opacity-0 animate-fade-in-delay-5">
             <a href="#projects" className="cosmic-button">
               View My Work
             </a>
@@ -47,6 +53,10 @@ export const HeroSection = () => {
         </div>
       </div>
 
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-10 animate-bounce text-muted-foreground">
+        <ArrowDown size={24} />
+      </div>
     </section>
   );
 };
