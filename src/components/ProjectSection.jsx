@@ -73,15 +73,26 @@ const projects = [
     demoUrl: "https://hackyours.raghavkatta.xyz/",
     githubUrl: "https://github.com/raghavxkatta/HackYours-BinaryBrains",
   },
-  {
-    id: 5,
-    title: "EchoMeet",
-    description:
-      "Video conferencing and collaboration app built with React, Node.js, and WebRTC — currently under development.",
-    image: "/project/project3.png",
-    tags: ["React", "Node.js", "Firebase", "WebRTC"],
-    comingSoon: true,
-  },
+ {
+  id: 5,
+  title: "Stock Trading Platform",
+  description:
+    "Architected and deployed a full-stack stock trading simulation platform inspired by Zerodha, featuring user authentication, real-time market data visualization.",
+  image: "/project/project4.png",
+  tags: [
+    "React.js",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "REST APIs",
+    "Charting Library",
+    "Authentication",
+  ],
+  demoUrl: "https://zerodha-frontend-p28t.onrender.com/",
+  githubUrl: "https://github.com/rainyyyyshrrr12/Zerodha-Dashboard",
+},
+
+  
 ];
 
 export const ProjectsSection = () => {
